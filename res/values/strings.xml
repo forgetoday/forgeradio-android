@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Forge Radio Player</string>
+    <string name="station_name">Forge Radio</string>
+    <string name="stream_url">http://icecast.commedia.org.uk:8000/sure.mp3</string>
+    <string name="schedule_url">http://forgetoday.com/radio-android/schedule.php</string>
+    <string name="off_air">We\'re currently off air</string>
+    <string name="off_air_simple">Off air</string>
+    <string name="exit">Exit</string>
+    <string name="about">About</string>
+    <string name="schedule_error">Unable to load schedule data</string>
+    <string name="catchup">Listen Again</string>
+    <string name="catchup_url">http://api.mixcloud.com/tag/forge-radio/new/?limit=20&amp;offset=0</string>
+    <string name="catchup_error">Unable to load Listen Again data</string>
+    <string name="media_illegal_error">Error occured while loading stream</string>
+    <string name="media_access_error">Radio stream currently unavailable</string>
+    <string name="catchup_lock_warning">When you\'re done listening, you need to leave this screen with the Back key.\n\nIf not, your phone won\'t go into standby (which is bad).</string>
+    <string name="loading">Loading...</string>
+    <string name="catchup_lock_accept">I understand</string>
+    <string name="catchup_flash_warning">You need to have Adobe Flash Player installed for this to work</string>
+    <string name="back">Back</string>
+    <string name="market">Open Market</string>
+    <string name="flashplayer_uri">market://details?id=com.adobe.flashplayer</string>
+    <string name="no_market">Couldn\'t find Android Market</string>
+    <string name="no_browser">Couldn\'t find an internet browser</string>
+    <string name="schedule">Schedule</string>
+    <string name="no_show_url">No webpage available for this show</string>
+    <string name="version_url">http://forgetoday.com/radio-android/version.txt</string>
+    <string name="download_yes">Download</string>
+    <string name="download_no">No thanks</string>
+    <string name="download_offer">A new version of the app is available. Do you want to download it\?</string>
+    <string name="contact">Contact</string>
+    <string-array name="support_email">
+        <item>forgeapp@adamharley.co.uk</item>
+    </string-array>
+    <string name="send_email">Send Email</string>
+    <string name="version">Version</string>
+    <string name="unknown">Unknown</string>
+    <string name="media_end">Radio stream has stopped</string>
+    <string name="thanks">Thank you to Ben Williams for his support</string>
+    <string name="developed_by">Developed by Adam Harley</string>
+</resources>

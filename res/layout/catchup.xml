@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@+id/LinearLayout1"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent" android:weightSum="1">
+    <ListView android:layout_alignParentLeft="true" android:layout_alignParentTop="true" android:layout_height="wrap_content" android:id="@+id/listView1" android:layout_width="match_parent" android:layout_above="@+id/schedulePrevBtn" android:layout_marginBottom="5dp"></ListView>
+    <Button android:id="@+id/schedulePrevBtn" android:layout_height="wrap_content" android:text="Newer" android:layout_width="wrap_content" android:layout_alignParentBottom="true" android:layout_alignParentLeft="true" android:enabled="false"></Button>
+    <Button android:id="@+id/scheduleNextBtn" android:layout_height="wrap_content" android:text="Older" android:layout_width="wrap_content" android:layout_alignParentBottom="true" android:layout_alignParentRight="true" android:enabled="false"></Button>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" android:id="@+id/scheduleDate1" android:text="" android:layout_marginBottom="28dp"></TextView>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_marginBottom="8dp" android:id="@+id/scheduleDate2" android:text="" android:layout_centerHorizontal="true"></TextView>
+</RelativeLayout>

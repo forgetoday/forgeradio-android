@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="wrap_content" android:baselineAligned="true" android:layout_height="50dp" android:minHeight="50dp" android:id="@+id/RelativeLayout1">
+	<TextView android:text="Tues 17 May 2011: Sam's final show on Forge Radio" android:textSize="13dp" android:textStyle="bold" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/catchupShowName" android:layout_alignParentTop="true" android:layout_alignParentRight="true" android:layout_toRightOf="@+id/catchupShowImage"></TextView>
+	<ImageView android:id="@+id/catchupShowImage" android:src="@drawable/icon" android:layout_height="wrap_content" android:layout_width="100dp" android:layout_alignParentLeft="true" android:layout_centerVertical="true" android:layout_marginTop="3dp" android:layout_marginBottom="3dp"></ImageView>
+	<TextView android:text="21/05/2011" android:textSize="12dp" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/catchupShowDate" android:layout_alignParentBottom="true" android:layout_alignParentRight="true" android:layout_marginRight="5dp"></TextView>
+</RelativeLayout>

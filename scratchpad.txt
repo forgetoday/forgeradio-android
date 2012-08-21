@@ -1,0 +1,282 @@
+package com.forgetoday.radio;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnPreparedListener;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+public class ForgeRadioListen extends Activity {
+	TextView eData;
+	MediaPlayer mp;
+	ImageView showImage;
+    /** Called when the activity is first created. */
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+    	String streamURL = new String("http://stream.frenchkissfm.com");
+    	
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+        
+        MediaPlayer mp = new MediaPlayer();
+        
+        // Setup the media source
+        try {
+        	mp.setAudioStreamType(AudioManager.STREAM_MUSIC);
+	        mp.setDataSource(streamURL);
+	        mp.prepareAsync();
+        }
+        catch (Exception e) {
+            eData = (TextView) findViewById(R.id.showName);
+    		eData.setText(e.getMessage());
+        }
+        
+        // Set the media player to start when ready
+        mp.setOnPreparedListener(preparedListener);
+    	
+        // Capture our button from layout
+        Button button = (Button) findViewById(R.id.btnPlay);
+        // Register the onClick listener with the implementation above
+        button.setOnClickListener(playListener);
+        
+        ProgressBar progressLoad = (ProgressBar) findViewById(R.id.progressLoad);
+        progressLoad.setVisibility(View.GONE);
+        showImage = (ImageView) findViewById(R.id.showImage);
+        showImage.setVisibility(View.VISIBLE);
+        
+        downloadFile("http://forgetoday.com/wp-content/uploads/2011/02/pop.jpg");
+        Log.i("im url","http://forgetoday.com/wp-content/uploads/2011/02/pop.jpg");
+    }
+    
+    private OnPreparedListener preparedListener = new OnPreparedListener() {
+		public void onPrepared(MediaPlayer mp1) {
+			mp1.start();
+		}
+    };
+    
+    private OnClickListener playListener = new OnClickListener() {
+        public void onClick(View v) {
+        	if ( mp.isPlaying() )
+            	mp.pause();
+//            else
+//            	mp.start();
+        }
+    };
+    
+    Bitmap bmImg;
+    void downloadFile(String fileUrl){
+          URL myFileUrl =null;          
+          try {
+               myFileUrl= new URL(fileUrl);
+          } catch (MalformedURLException e) {
+               // TODO Auto-generated catch block
+               e.printStackTrace();
+          }
+          try {
+               HttpURLConnection conn= (HttpURLConnection)myFileUrl.openConnection();
+               conn.setDoInput(true);
+               conn.connect();
+               int length = conn.getContentLength();
+               InputStream is = conn.getInputStream();
+               
+               bmImg = BitmapFactory.decodeStream(is);
+               showImage.setImageBitmap(bmImg);
+          } catch (IOException e) {
+               // TODO Auto-generated catch block
+               e.printStackTrace();
+          }
+     }
+    
+    public ArrayList<String> fetchShows()
+    {
+        ArrayList<String> listItems = new ArrayList<String>();
+ 
+        try {
+    	    // Construct data
+    	    String data = URLEncoder.encode("action", "UTF-8") + "=" + URLEncoder.encode("now_playing", "UTF-8");
+//    	    data += "&" + URLEncoder.encode("key2", "UTF-8") + "=" + URLEncoder.encode("value2", "UTF-8");
+    	    
+    	    // Send data
+    	    URL url = new URL("http://localhost/wp-admin/admin-ajax.php");
+    	    URLConnection conn = url.openConnection();
+    	    conn.setDoOutput(true);
+    	    OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+    	    wr.write(data);
+    	    wr.flush();
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(
+                    conn.getInputStream()));
+
+    	    // Get the response
+            String line;
+
+            while ((line = in.readLine()) != null) {
+//				JSONObject jo = new JSONObject(line);
+            }
+            
+            
+        } catch (MalformedURLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }/* catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }*/
+        return listItems;
+    }
+    
+    
+}
+
+
+
+
+
+
+
+
+package com.forgetoday.radio;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.R.string;
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnPreparedListener;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+public class ForgeRadioListen extends Activity {
+	TextView eData;
+	MediaPlayer mp;
+	ImageView showImage;
+	private String[] mStrings;
+	
+	/** Called when the activity is first created. */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+	    super.onCreate(savedInstanceState);
+	    setContentView(R.layout.main);
+
+	    ArrayList<String> listItems = new ArrayList<String>();
+	    try {
+	        URL twitter = new URL(
+	                "http://localhost/wp-admin/admin-ajax.php?action=now-playing");
+	        URLConnection tc = twitter.openConnection();
+	        BufferedReader in = new BufferedReader(new InputStreamReader(
+	                tc.getInputStream()));
+
+	        String line = new String();
+	        while (in.readLine() != null) {
+	            line = in.readLine();
+	        }
+
+	        //Your string can now be parsed to a JSONobject which contains the array
+	        JSONObject json = new JSONObject(line);
+	        Log.d("JSON","Object: "+json);
+
+	        //Now we extract the JSONObject from our object
+	        JSONObject currentShow = json.getJSONObject("current");
+	        Log.d("JSON","data: "+currentShow);
+/*	        
+	        String showImageURL = currentShow.getString("image");
+	        Log.d("BITMAP",showImageURL);
+
+	        //Now to extract an object from the array you call:
+	        for (int i = 0; i < data.length(); i++){
+	            JSONObject jo = data.getJSONObject(i);
+	            Log.d("JSON","jo: "+jo);
+
+	            //From each object extract the picture file name
+	            String picPath = jo.getString("employeepic");
+	            Log.d("JSON","picPath: "+picPath);
+
+	            //Add to list
+	            listItems.add(picPath);
+	        }
+*/	        
+
+	    } catch (Exception e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace(); 
+	    }
+/*
+	    //Convert ArralyList to array
+	    mStrings = listItems.toArray(new String[listItems.size()]);
+*/
+	    //Just to test image download
+	    ImageView iv = (ImageView) findViewById(R.id.showImage);
+	    String showImageURL = null;
+		Bitmap b = getUserPic(showImageURL);
+	    iv.setImageBitmap(b);
+	}
+
+	/**
+	 * Function loads the pic from url
+	 * 
+	 * @param userID
+	 */
+	public Bitmap getUserPic(String imageURL) {
+	    Bitmap bitmap = null;
+	    Log.d("BITMAP", "Loading Picture");
+	    try {
+	        bitmap = BitmapFactory.decodeStream((InputStream)new URL(imageURL).getContent());
+	    } catch (Exception e) {
+	        Log.d("BITMAP", "Loading Picture FAILED");
+	        e.printStackTrace();
+	    }
+	    return bitmap;
+	}
+	
+}
